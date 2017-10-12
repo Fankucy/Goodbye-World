@@ -5,6 +5,9 @@ dat <- getSymbols('GOOGL', from = '2012-09-27', to = '2017-09-27')
 dim(GOOGL)
 head(GOOGL)
 chartSeries(GOOGL, theme = 'white')
+#addSMA(n = 10, on = 1, with.col = Cl, overlay = TRUE, col = "brown")
+#addRSI(n = 14, maType = "EMA", wilder = TRUE)
+
 chartSeries(GOOGL, theme = 'white', TA = NULL) #without volumn
 
 GOOGL.simrtn <- diff(GOOGL[,6])/GOOGL[1:1256,6]
@@ -21,7 +24,7 @@ basicStats(GOOGL.logrtn)#图形之外的说明收益率序列特征的数据
 #sd()
 #skewness()
 #kurtosis()
-#normalTest( ,method=‘jb’)
+#normalTest(GOOGL.logrtn,method='jb')
 
 #visualization
 rtn <- as.numeric(GOOGL.logrtn[2:1257])
@@ -42,7 +45,8 @@ plot(tdx, rtn, xlab = 'year', ylab = 'rtn', type = 'l')
 grid()
 
 # Q-Q plot
-
+qqnormPlot(rtn)
+normalTest(rtn, method = 'jb')
 # ACF plot
 
 
