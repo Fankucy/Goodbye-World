@@ -6,7 +6,7 @@ library(moments)
 
 ####################read data######################
 getSymbols("000300.SS",from="2005-04-08",to="2017-03-25")
-#HSSB=read.table("D:/×ÀÃæ/ÎÄ¼ş¼Ğ/Ñ§Ï°/´óÈıÏÂ/Financial Econometrics/×÷Òµ/µÚÒ»´Î/daily.txt",header=TRUE)
+#HSSB=read.table("D:/æ¡Œé¢/æ–‡ä»¶å¤¹/å­¦ä¹ /å¤§ä¸‰ä¸‹/Financial Econometrics/ä½œä¸š/ç¬¬ä¸€æ¬¡/daily.txt",header=TRUE)
 
 
 ###################################################
