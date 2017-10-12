@@ -1,0 +1,462 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+%\documentclass{ctexart}
+\usepackage{color}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+%to insert graphicx
+\usepackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref}
+%to insert link
+\usepackage{listings}
+\lstset{frame=shadowbox,basicstyle=\scriptsize,language=R,numbers=left,numberstyle=\small,xleftmargin=3em,xrightmargin=3em, breaklines=true,keywordstyle=\color[RGB]{0,56,115},stringstyle=\color[RGB]{0,166,82},breakatwhitespace=false, showstringspaces=false}
+%to insert R code
+
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[C]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize
+\textsc{Southwestern University of Finance and Economics, School of Finance} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Financial Econometrics: Assignment One\\ % The assignment title
+\Large STYLIZED FACTS OF FINANCE DATA
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{NAME: Zhang Jia\\MAJOR: Finance\\STUDENT NUMBER：41419115\\CLASS TIME: Thursday Morning} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+
+
+\section{Task Description}
+
+Download daily, weekly and monthly prices or returns for any stock or index in Chinese stock
+market. Please demonstrate that whether the data has the stylized facts you have learned in
+our class. Note that you should provide necessary figures to support your conclusion together
+with the R code you used.
+
+\section{Abstract}
+
+Original data used for this assignment are daily prices of \textbf{CSI 300 Index}\footnote{ The CSI 300 is a capitalization-weighted stock market index designed to replicate the performance of 300 stocks traded in the Shanghai and Shenzhen stock exchanges. The index has been calculated since April 8, 2005.} from April 8, 2005 to March 25, 2017 (downloaded from \href{http://finance.yahoo.com/}{Yahoo Finance}) , which are transformed into daily, weekly and monthly returns for further discussion.\par
+Fortunately, the results derived from figures as well as some hypothesis tests are in agreement with the stylized facts learned in class. \par
+In the next section, 7 different kinds of stylized facts will be discussed with necessary figures and R code.
+\bigskip
+\bigskip
+%------------------------------------------------
+\section{Stylized Facts of Financial Data}
+ We've already learned 7 stylized facts of financial data in class, brief descriptions of which are as follows.\\
+ \\
+ %\textcolor[RGB]{0,56,115}{\textbf{\large{Leverage Effect:}}}\par
+\textbf{\large{Stationarity:}}\par
+ Most return sequences can be modeled as a stochastic processes with at least time-invariant first two
+moments.\\
+\\
+\textbf{\large{Heavy tails:}}\par
+ The probability distribution of return $r_{t}$ often exhibits heavier tails than those of a normal distribution.\\
+\\
+\textbf{\large{Asymmetry:}}\par
+ The distribution of return $r_{t}$ is often negatively skewed, suggesting that extreme negative returns are more frequent than extreme positive returns.\\
+\\
+\textbf{\large{Volatility Clustering:}}\par
+ Large price changes occur in clusters.\\
+\\
+\textbf{\large{Aggregational Gaussianity:}}\par
+ When the time horizon increases, the central limit law sets in and the distribution of the returns over a
+long time-horizon tends toward a normal distribution.\\
+\\
+\textbf{\large{Long Range Dependence:}}\par
+ Daily squared and absolute returns exhibit small and significant autocorrelations.\\
+\\
+\textbf{\large{Leverage Effect:}}\par
+ Asset returns are negatively correlated with the changes of their volatilities.\\
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{Stationarity}
+Figure 3.1 leaves us with a direct impression that daily prices of SCI 300 Index are not stationary, with the curve showing an upward trend in general.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figure1.png}\\
+  \caption{Time plot of daily prices of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+\end{figure}
+
+\textbf{\textit{R Demonstration}}
+
+\begin{lstlisting}[language=R]
+library(tseries)
+library(quantmod)
+getSymbols("000300.SS",from="2005-04-08",to="2017-03-25")
+HSSB.dprice=`000300.SS`$`000300.SS.Adjusted`
+dprice=ts(HSSB.dprice,frequency=365,start=c(2005,4,8))
+ts.plot(dprice,gpars=list(xlab="Year",ylab="Daily Price",main="SCI 300 Index [2005/4/8-2017/3/25]",col="blue"))
+\end{lstlisting}
+
+\bigskip
+\bigskip
+\bigskip
+
+Now, we use Augmented Dickey-Fuller Test to confirm our conclusion. The results are as follows:\par
+%\centering
+\textbf{Augmented Dickey-Fuller Test}\par
+\texttt{data:  HSSB.dprice}\par
+\texttt{Dickey-Fuller = -2.1938, Lag order = 14, p-value = 0.4963}\par
+\texttt{alternative hypothesis: stationary}\par
+
+\bigskip
+
+\textbf{\textit{R Demonstration}}
+
+\begin{lstlisting}[language=R]
+adf.test(HSSB.dprice)
+\end{lstlisting}
+
+
+\bigskip
+\bigskip
+The alternative hypothesis for ADF test is stationary and p-value = $0.4963\gg0.05$. Hence we can say that under a confident level of 95\%, we don't have enough evidence to reject the null hypothesis. In other words, the time series of prices is not stationary.\par
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+Similarly, we observe the time plots of daily, weekly and monthly returns, which are shown in Figure 3.2. All of them seem to be stationary. Once more, we do ADF test to confirm our conclusion. The results are in agreement with what we've learned in class.\\
+
+\textbf{Augmented Dickey-Fuller Test}\par
+\texttt{data:  HSSB.dlogrtn}\par
+\texttt{Dickey-Fuller = -12.283, Lag order = 14, p-value = 0.01}\par
+\texttt{alternative hypothesis: stationary}\par
+
+\textbf{Augmented Dickey-Fuller Test}\par
+\texttt{data:  HSSB.wlogrtn}\par
+\texttt{Dickey-Fuller = -6.5576, Lag order = 8, p-value = 0.01}\par
+\texttt{alternative hypothesis: stationary}\par
+
+\textbf{Augmented Dickey-Fuller Test}\par
+\texttt{data:  HSSB.mlogrtn}\par
+\texttt{Dickey-Fuller = -3.9651, Lag order = 5, p-value = 0.01296}\par
+\texttt{alternative hypothesis: stationary}\par
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+adf.test(HSSB.dlogrtn)
+adf.test(HSSB.wlogrtn)
+adf.test(HSSB.mlogrtn)
+\end{lstlisting}
+\bigskip
+\bigskip
+%\begin{figure}[H]
+%  \centering
+%  \includegraphics[width=\textwidth]{figure2.png}\\
+%  \caption{Time plot of daily log returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+%\end{figure}
+%
+%\begin{figure}[H]
+%  \centering
+%  \includegraphics[width=\textwidth]{figure3.png}\\
+%  \caption{Time plot of weekly log returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+%\end{figure}
+%
+%\begin{figure}[H]
+%  \centering
+%  \includegraphics[width=\textwidth]{figure4.png}\\
+%  \caption{Time plot of monthly log returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+%\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figure5.png}\\
+  \caption{Time plot of daily, weekly and monthly log returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+\end{figure}
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(tseries)
+library(quantmod)
+getSymbols("000300.SS",from="2005-04-08",to="2017-03-25")
+
+par(mfrow=c(3,1))
+HSSB.dlogrtn = periodReturn(`000300.SS`,period='daily',type='log')
+dlogreturn = ts(HSSB.dlogrtn, frequency = 365,start=c(2005,4,8))
+ts.plot(dlogreturn,gpars=list(xlab = "Year", ylab="Daily Log Return",main="SCI 300 Index [2005/4/8-2017/3/25]",col="blue"))
+#daily log return
+
+HSSB.wlogrtn = periodReturn(`000300.SS`,period='weekly',type='log')
+wlogreturn = ts(HSSB.wlogrtn, frequency = 52,start=c(2005,4,8))
+ts.plot(wlogreturn,gpars=list(xlab = "Year", ylab="Weekly Log Return",main="SCI 300 Index [2005/4/8-2017/3/25]",col="blue"))
+#weekly log return
+
+HSSB.mlogrtn = periodReturn(`000300.SS`,period='monthly',type='log')
+mlogreturn = ts(HSSB.mlogrtn, frequency = 12,start=c(2005,4,8))
+ts.plot(mlogreturn,gpars=list(xlab = "Year", ylab="Monthly Log Return",main="SCI 300 Index [2005/4/8-2017/3/25]",col="blue"))
+#monthly log return
+\end{lstlisting}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{Heavy tails}
+As we can see in Figure 3.3, all the returns show heavy tails when compared with normal distribution, which agrees with the stylized facts of financial data.\\
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figure6.png}\\
+  \caption{Histograms of daily, weekly and monthly returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+\end{figure}
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(tseries)
+library(quantmod)
+getSymbols("000300.SS",from="2005-04-08",to="2017-03-25")
+
+par(mfrow=c(1,3))
+hist(HSSB.dlogrtn,breaks=100,prob=TRUE,col="yellow",xlab='',main='Daily Returns')
+nrx = seq(min(HSSB.dlogrtn),max(HSSB.dlogrtn),by=0.001)
+nry = dnorm(nrx,mean(HSSB.dlogrtn),sd(HSSB.dlogrtn))
+lines(nrx,nry,col="blue")
+
+hist(HSSB.wlogrtn,breaks=100,prob=TRUE,col="yellow",xlab='',main='Weekly Returns')
+wnrx = seq(min(HSSB.wlogrtn),max(HSSB.wlogrtn),by=0.001)
+wnry = dnorm(wnrx,mean(HSSB.wlogrtn),sd(HSSB.wlogrtn))
+lines(wnrx,wnry,col="blue")
+
+hist(HSSB.mlogrtn,breaks=100,prob=TRUE,col="yellow",xlab='',main='Monthly Returns')
+mnrx = seq(min(HSSB.mlogrtn),max(HSSB.mlogrtn),by=0.001)
+mnry = dnorm(mnrx,mean(HSSB.mlogrtn),sd(HSSB.mlogrtn))
+lines(mnrx,mnry,col="blue")
+\end{lstlisting}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+Let's assume that heavy tails always occur together with leptokurtic. Then we can use Kurtosis to examine our conclusion. The results below agree with our conclusion (Kurt > 3).
+
+\bigskip
+
+\textbf{Kurtosis}\par
+\texttt{daily.returns: 6.540863 }\par
+\texttt{weekly.returns: 4.896758}\par
+\texttt{monthly.returns: 4.101326}\par
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(moments)
+kurtosis(HSSB.dlogrtn)
+kurtosis(HSSB.wlogrtn)
+kurtosis(HSSB.mlogrtn)
+\end{lstlisting}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{Asymmetry}
+As shown in Figure 3.3, The distributions of returns are negatively skewed, suggesting that extreme negative returns are more frequent than extreme positive returns.\par
+we can use Skewness to examine our conclusion. The results below agree with our conclusion (Skew < 0).
+
+\bigskip
+
+\textbf{Skewness}\par
+\texttt{daily.returns: -0.5364833}\par
+\texttt{weekly.returns: -0.2767723}\par
+\texttt{monthly.returns: -0.4993637}\par
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(moments)
+skewness(HSSB.dlogrtn)
+skewness(HSSB.wlogrtn)
+skewness(HSSB.mlogrtn)
+\end{lstlisting}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{Volatility Clustering}
+
+As we can see from Figure 3.2, large price changes occur in clusters.
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\subsection{Aggregational Gaussianity}
+
+As we can see from Figure 3.4, when the time horizon increases, the distribution of the returns over a long time-horizon tends toward a normal distribution.\par
+We should note that the scales of vertical ordinate in three histograms are different. Ignoring this, we may draw an opposite conclusion.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figure7.png}\\
+  \caption{Histograms and Q-Q plots of daily, weekly and monthly returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+\end{figure}
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(tseries)
+library(quantmod)
+getSymbols("000300.SS",from="2005-04-08",to="2017-03-25")
+
+par(mfrow=c(2,3))
+hist(HSSB.dlogrtn,breaks=100,prob=TRUE,col="yellow",xlab='',main='Daily Returns')
+nrx = seq(min(HSSB.dlogrtn),max(HSSB.dlogrtn),by=0.001)
+nry = dnorm(nrx,mean(HSSB.dlogrtn),sd(HSSB.dlogrtn))
+lines(nrx,nry,col="blue")
+
+hist(HSSB.wlogrtn,breaks=100,prob=TRUE,col="yellow",xlab='',main='Weekly Returns')
+wnrx = seq(min(HSSB.wlogrtn),max(HSSB.wlogrtn),by=0.001)
+wnry = dnorm(wnrx,mean(HSSB.wlogrtn),sd(HSSB.wlogrtn))
+lines(wnrx,wnry,col="blue")
+
+hist(HSSB.mlogrtn,breaks=100,prob=TRUE,col="yellow",xlab='',main='Monthly Returns')
+mnrx = seq(min(HSSB.mlogrtn),max(HSSB.mlogrtn),by=0.001)
+mnry = dnorm(mnrx,mean(HSSB.mlogrtn),sd(HSSB.mlogrtn))
+lines(mnrx,mnry,col="blue")
+
+qqnorm(HSSB.dlogrtn,col="brown",ylab='Quantile of Daily Returns',xlab='Normal Quantile')
+qqline(HSSB.dlogrtn,col="blue")
+
+qqnorm(HSSB.wlogrtn,col="brown",ylab='Quantile of Weekly Returns',xlab='Normal Quantile')
+qqline(HSSB.wlogrtn,col="blue")
+
+qqnorm(HSSB.mlogrtn,col="brown",ylab='Quantile of Monthly Returns',xlab='Normal Quantile')
+qqline(HSSB.mlogrtn,col="blue")
+\end{lstlisting}
+
+\bigskip
+\bigskip
+
+Now we use Jarque Bera Test to confirm our conclusion. The results below denote that the returns are not normally distributed, which agrees with heavy tails and asymmetry to some degree. Nevertheless, as time horizon increases, the distribution tends toward a normal distribution ( X-squared is decreasing).
+
+\bigskip
+\textbf{Jarque Bera Test}\par
+\texttt{data:  HSSB.dlogrtn}\par
+\texttt{X-squared = 1686.6, df = 2, p-value < 2.2e-16}\par
+
+\textbf{Jarque Bera Test}\par
+\texttt{data:  HSSB.wlogrtn}\par
+\texttt{X-squared = 99.88, df = 2, p-value < 2.2e-16}\par
+
+\textbf{Jarque Bera Test}\par
+\texttt{data:  HSSB.mlogrtn}\par
+\texttt{X-squared = 13.262, df = 2, p-value = 0.001319}\par
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(moments)
+jarque.bera.test(HSSB.dlogrtn)
+jarque.bera.test(HSSB.wlogrtn)
+jarque.bera.test(HSSB.mlogrtn)
+\end{lstlisting}
+\newpage
+
+\subsection{Long Range Dependence}
+As we can see in Figure 3.5, Daily squared and absolute returns exhibit small and significant autocorrelations.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figure8.png}\\
+  \caption{ACF Testss of daily, weekly and monthly returns of SCI 300 Index from April 8, 2005 to March 25, 2017.}
+\end{figure}
+
+\bigskip
+\textbf{\textit{R Demonstration}}
+\begin{lstlisting}[language=R]
+library(tseries)
+library(quantmod)
+getSymbols("000300.SS",from="2005-04-08",to="2017-03-25")
+
+par(mfrow=c(3,3))
+acf(HSSB.dlogrtn,lag=40,main="Daily Returns")
+acf(HSSB.wlogrtn,lag=32,main="Weekly Returns")
+acf(HSSB.mlogrtn,lag=24,main="Monthly Returns")
+
+acf(HSSB.dlogrtn^2,lag=40,main="Squared Daily Returns")
+acf(HSSB.wlogrtn^2,lag=32,main="Squared Weekly Returns")
+acf(HSSB.mlogrtn^2,lag=24,main="Squared Monthly Returns")
+
+acf(abs(HSSB.dlogrtn),lag=40,main="Absolute Daily Returns")
+acf(abs(HSSB.wlogrtn),lag=32,main="Absolute Weekly Returns")
+acf(abs(HSSB.mlogrtn),lag=24,main="Absolute Monthly Returns")
+\end{lstlisting}
+
+\bigskip
+\bigskip
+
+\subsection{Leverage Effect}
+This part waits to be finished.
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
